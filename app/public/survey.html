@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+<label for="name">Your Name</label> <br>
+<input id="name" type="text" id="name"> <br>
+<label for="photo">A link to your picture</label><br>
+<input id="photo" type="text" id="link">
+
+<h5><strong>1</strong></h5>
+<h4>You are extroverted.</h4>
+<select class="chosen-select" id="q1">
+    <option value=""></option>
+    <option value="1">1 (Strongly Disagree)</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 (Strongly Agree)</option>
+</select>
+
+<h5><strong>2</strong></h5>
+<h4>You are introverted.</h4>
+<select class="chosen-select" id="q2">
+    <option value=""></option>
+    <option value="1">1 (Strongly Disagree)</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 (Strongly Agree)</option>
+</select>
+
+<h5><strong>3</strong></h5>
+<h4>You find your mind wandering from time to time.</h4>
+<select class="chosen-select" id="q3">
+    <option value=""></option>
+    <option value="1">1 (Strongly Disagree)</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 (Strongly Agree)</option>
+</select>
+
+<h5><strong>4</strong></h5>
+<h4>Your mind moves at a million miles an hour.</h4>
+<select class="chosen-select" id="q4">
+    <option value=""></option>
+    <option value="1">1 (Strongly Disagree)</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 (Strongly Agree)</option>
+</select>
+
+<h5><strong>5</strong></h5>
+<h4>Situations with large crowds make you nervous.</h4>
+<select class="chosen-select" id="q5">
+    <option value=""></option>
+    <option value="1">1 (Strongly Disagree)</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 (Strongly Agree)</option>
+</select>
+
+<h5><strong>6</strong></h5>
+<h4>You enjoy outdoor activities.</h4>
+<select class="chosen-select" id="q6">
+    <option value=""></option>
+    <option value="1">1 (Strongly Disagree)</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 (Strongly Agree)</option>
+</select>
+
+<h5><strong>7</strong></h5>
+<h4>You value social skills as much as intelligence.</h4>
+<select class="chosen-select" id="q7">
+    <option value=""></option>
+    <option value="1">1 (Strongly Disagree)</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 (Strongly Agree)</option>
+</select>
+
+<h5><strong>8</strong></h5>
+<h4>A night at home relaxing is just as good as night out.</h4>
+<select class="validity" id="q8">
+    <option value=""></option>
+    <option value="1">1 (Strongly Disagree)</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 (Strongly Agree)</option>
+</select>
+
+<h5><strong>9</strong></h5>
+<h4></h4>
+<select class="validity" id="q9">
+    <option value=""></option>
+    <option value="1">1 (Strongly Disagree)</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 (Strongly Agree)</option>
+</select>
+
+<h5><strong>10</strong></h5>
+<h4></h4>
+<select class="validity" id="q10">
+    <option value=""></option>
+    <option value="1">1 (Strongly Disagree)</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5 (Strongly Agree)</option>
+</select> <br>
+
+<button type="button" class="btn btn-primary" id="submit">Submit</button>
+
+<div>
+<h4> Your New Friends Name</h4>
+<h5 id="friendsname"></h5>
+
+<img src="" alt="" width="250px" id="pic">
+</div>
+
+
+<script src="javascript/java.js">
+
+$(document).ready(function() {
+    $("#submit").click(function() {
+    let info = {
+        name: $("name").val().trim(),
+        picture: $("link").val().trim(),
+        answers: [
+            $('#q1').val(),
+            $('#q2').val(),
+            $('#q3').val(),
+            $('#q4').val(),
+            $('#q5').val(),
+            $('#q6').val(),
+            $('#q7').val(),
+            $('#q8').val(),
+            $('#q9').val(),
+            $('#q10').val(),
+            ]
+        }
+    });
+
+    let url = window.location.origin;
+
+    $.post(url + "/api/friends", newFriend, function(data) {
+    $("#friendsname").text(data.name);
+    $("#pic").attr("src", data.photo);
+    });
+
+})
+
+</script>
+
+</body>
+
+</html>
+
